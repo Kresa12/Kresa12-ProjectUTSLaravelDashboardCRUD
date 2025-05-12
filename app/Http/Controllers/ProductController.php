@@ -11,16 +11,24 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::latest()->paginate(10);
+        $products = Product::query()
+            ->when($request->filled('q'), function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->q . '%')
+                    ->orWhere('description', 'like', '%' . $request->q . '%');
+            })
+            ->paginate(10);
 
-        return view('dashboard.products.index', compact('products'));
+        return view('dashboard.products.index', [
+            'products' => $products,
+            'q' => $request->q
+        ]);
     }
 
     public function create()
     {
-        $categories = Categories::all(); // untuk dropdown kategori
+        $categories = Categories::all();
 
         return view('dashboard.products.create', compact('categories'));
     }
@@ -111,13 +119,13 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         return view('dashboard.products.show', compact('product'));
     }
-    
+
     public function deleteImage(Product $product)
-{
-    Storage::delete($product->image);
-    $product->update(['image' => null]);
-    
-    return back()->with('successMessage', 'Image deleted successfully');
-}
+    {
+        Storage::delete($product->image);
+        $product->update(['image' => null]);
+
+        return back()->with('successMessage', 'Image deleted successfully');
+    }
 
 }

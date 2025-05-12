@@ -15,7 +15,6 @@
             </div>
         @endif
 
-        <!-- Enhanced Card with Stronger Shadow -->
         <div class="bg-white dark:bg-gray-800 shadow-xl rounded-lg p-6 transition-all duration-300 hover:shadow-2xl">
             <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data" class="space-y-6">
                 @csrf

@@ -165,14 +165,14 @@
     <script>
         function confirmDelete(categoryId, categoryName) {
             Swal.fire({
-                title: 'Delete Category',
-                html: `Are you sure you want to delete <strong>${categoryName}</strong>?`,
+                title: 'Hapus Kategori',
+                html: `Apakah Kamu Yakin Ingin Menghapus <strong>${categoryName}</strong>?`,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'Cancel',
+                confirmButtonText: 'Ya, Hapus',
+                cancelButtonText: 'Tidak',
                 backdrop: `
                 rgba(0,0,0,0.7)
                 url("/images/trash-icon.png")

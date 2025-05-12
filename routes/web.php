@@ -18,20 +18,16 @@ Route::get('checkout', [HomepageController::class, 'checkout']);
 
 
 Route::group(['prefix'=>'dashboard'], function(){
-     Route::get('/',[DashboardController::class,'index'])->name('dashboard');
-
+    Route::get('/',[DashboardController::class,'index'])->name('dashboard');
     Route::resource('categories',ProductCategoryController::class);
     Route::resource('products', ProductController::class);
     Route::delete('products/{product}/delete-image', [ProductController::class, 'deleteImage'])
     ->name('products.delete-image');
-
-
 })->middleware(['auth', 'verified']);
 
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
-
     Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');

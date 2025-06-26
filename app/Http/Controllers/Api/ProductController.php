@@ -12,5 +12,10 @@ class ProductController extends Controller
     {
         $products = Product::latest()->paginate(10);
         return new ProductResource(true, 'List Data Product', $products);
+        // return Product::all();
+    }
+
+    public function show($id) {
+        return Product::find($id);
     }
 }

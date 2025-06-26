@@ -12,7 +12,7 @@ Route::apiResource(
 Route::apiResource(
     '/products',
     ProductController::class
-)->only('index');
+)->only('index', 'show');
 Route::get('/user', function (Request $request) {
-    return $request->user() ;
+    return $request->user();
 })->middleware('auth:sanctum');

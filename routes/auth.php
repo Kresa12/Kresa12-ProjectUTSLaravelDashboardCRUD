@@ -6,7 +6,9 @@ use Livewire\Volt\Volt;
 
 Route::middleware('guest')->group(function () {
     Volt::route('login', 'auth.login')
-        ->name('login');
+    ->middleware('throttle:6,1')
+    ->name('login');
+
 
     Volt::route('register', 'auth.register')
         ->name('register');
